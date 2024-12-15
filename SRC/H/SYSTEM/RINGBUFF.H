@@ -182,6 +182,17 @@ void *createRingBufferItemEx(ring_buffer_t *buffer, create_ring_buffer_item_call
 void *createRingBufferItemExArgs(ring_buffer_t *buffer, create_ring_buffer_item_callback onBeforeCreate, va_list args);
 
 /**
+ * @brief Gets the pointer to an item in the ring buffer.
+ * @param buffer Pointer to a ring buffer.
+ * @param index Index of the item. Must be a number between 0 and below of ring buffer
+ * count.
+ * @returns Returns the pointer to the new item in the ring buffer, or #NULL if the
+ * index is over the ring buffer count or capacity or below zero, or if the list is
+ * #NULL.
+ */
+void *getRingBufferItem(const ring_buffer_t *buffer, int index);
+
+/**
  * @brief Loops the entire ring buffer and execute a callback in each item.
  * @param buffer Pointer to the ring buffer.
  * @param onItem Callback to execute in each item.

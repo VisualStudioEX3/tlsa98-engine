@@ -139,6 +139,19 @@ void *createRingBufferItemExArgs(ring_buffer_t *buffer, create_ring_buffer_item_
     return item;
 }
 
+void *getRingBufferItem(const ring_buffer_t *buffer, int index)
+{
+    int count = getRingBufferCount(buffer);
+    int bufferIndex = buffer->firstIndex + index;
+
+    if (bufferIndex >= count)
+        bufferIndex = buffer->firstIndex - (bufferIndex - count);
+
+    void *item = getListItem(buffer->list, bufferIndex);
+
+    return item;
+}
+
 void forEachRingBuffer(const ring_buffer_t *buffer, foreach_ring_buffer_item_callback onItem, ...)
 {
     va_list args;
