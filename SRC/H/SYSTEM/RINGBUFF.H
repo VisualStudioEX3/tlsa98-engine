@@ -27,16 +27,10 @@ typedef struct
     list_t *list;
 
     /**
-     * @brief Index to the current first item.
-     * @return Returns the index to the current first item in the ring buffer.
+     * @brief Index in the ring buffer to create the next item.
+     * @return Returns the index in the ring buffer to create the next item.
      */
-    uint firstIndex;
-
-    /**
-     * @brief Index to the current last item.
-     * @return Returns the index to the current last item in the ring buffer.
-     */
-    uint lastIndex;
+    uint insertIndex;
 } ring_buffer_t;
 
 /**

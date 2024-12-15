@@ -7,6 +7,21 @@
 
 #include "..\H\SYSTEM\RINGBUFF.H"
 
+static uint getCurrentFirstIndex(const ring_buffer_t *buffer)
+{
+    int index = 0;
+
+    if (isRingBufferFull(buffer))
+    {
+        index = buffer->insertIndex + 1;
+
+        if (index == getRingBufferCapacity(buffer))
+            index = 0;
+    }
+
+    return index;
+}
+
 int getRingBufferCapacity(const ring_buffer_t *buffer)
 {
     return getListCapacity(buffer->list);
@@ -38,8 +53,7 @@ ring_buffer_t *createRingBuffer(uint capacity, size_t itemSize)
         if (buffer)
         {
             buffer->list = createList(capacity, itemSize);
-            buffer->firstIndex = 0;
-            buffer->lastIndex = 0;
+            buffer->insertIndex = 0;
 
             if (buffer->list == NULL)
             {
@@ -62,8 +76,7 @@ void clearRingBufferEx(ring_buffer_t *buffer, foreach_ring_buffer_item_callback 
     if (buffer)
     {
         forEachRingBuffer(buffer, onItem);
-        buffer->firstIndex = 0;
-        buffer->lastIndex = 0;
+        buffer->insertIndex = 0;
     }
 }
 
@@ -117,22 +130,12 @@ void *createRingBufferItemExArgs(ring_buffer_t *buffer, create_ring_buffer_item_
         if (canCreate)
         {
             if (isRingBufferFull(buffer))
-            {
-                item = getListItem(buffer->list, buffer->lastIndex);
-
-                uint capacity = getRingBufferCapacity(buffer);
-
-                if (++buffer->firstIndex == capacity)
-                    buffer->firstIndex = 0;
-
-                if (++buffer->lastIndex == capacity)
-                    buffer->lastIndex = 0;
-            }
+                item = getListItem(buffer->list, buffer->insertIndex);
             else
-            {
                 item = createListItem(buffer->list);
-                buffer->lastIndex++;
-            }
+
+            if (++buffer->insertIndex == getRingBufferCapacity(buffer))
+                buffer->insertIndex = 0;
         }
     }
 
@@ -142,10 +145,10 @@ void *createRingBufferItemExArgs(ring_buffer_t *buffer, create_ring_buffer_item_
 void *getRingBufferItem(const ring_buffer_t *buffer, int index)
 {
     int count = getRingBufferCount(buffer);
-    int bufferIndex = buffer->firstIndex + index;
+    int bufferIndex = getCurrentFirstIndex(buffer) + index;
 
     if (bufferIndex >= count)
-        bufferIndex = buffer->firstIndex - (bufferIndex - count);
+        bufferIndex = bufferIndex - count;
 
     void *item = getListItem(buffer->list, bufferIndex);
 
@@ -168,7 +171,7 @@ void forEachRingBufferArgs(const ring_buffer_t *buffer, foreach_ring_buffer_item
     if (!isRingBufferEmpty(buffer) && onItem)
     {
         int count = getRingBufferCount(buffer);
-        int bufferIndex = buffer->firstIndex;
+        int bufferIndex = getCurrentFirstIndex(buffer);
 
         for (int i = 0; i < count; i++)
         {
