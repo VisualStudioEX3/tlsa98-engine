@@ -24,22 +24,30 @@ static uint getCurrentFirstIndex(const ring_buffer_t *buffer)
 
 int getRingBufferCapacity(const ring_buffer_t *buffer)
 {
-    return getListCapacity(buffer->list);
+    return buffer
+               ? getListCapacity(buffer->list)
+               : RESULT_ERROR;
 }
 
 int getRingBufferCount(const ring_buffer_t *buffer)
 {
-    return getListCount(buffer->list);
+    return buffer
+               ? getListCount(buffer->list)
+               : RESULT_ERROR;
 }
 
 bool isRingBufferEmpty(const ring_buffer_t *buffer)
 {
-    return isListEmpty(buffer->list);
+    return buffer
+               ? isListEmpty(buffer->list)
+               : false;
 }
 
 bool isRingBufferFull(const ring_buffer_t *buffer)
 {
-    return isListFull(buffer->list);
+    return buffer
+               ? isListFull(buffer->list)
+               : false;
 }
 
 ring_buffer_t *createRingBuffer(uint capacity, size_t itemSize)
@@ -144,13 +152,18 @@ void *createRingBufferItemExArgs(ring_buffer_t *buffer, create_ring_buffer_item_
 
 void *getRingBufferItem(const ring_buffer_t *buffer, int index)
 {
-    int count = getRingBufferCount(buffer);
-    int bufferIndex = getCurrentFirstIndex(buffer) + index;
+    void *item = NULL;
 
-    if (bufferIndex >= count)
-        bufferIndex = bufferIndex - count;
+    if (buffer)
+    {
+        int count = getRingBufferCount(buffer);
+        int bufferIndex = getCurrentFirstIndex(buffer) + index;
 
-    void *item = getListItem(buffer->list, bufferIndex);
+        if (bufferIndex >= count)
+            bufferIndex = bufferIndex - count;
+
+        item = getListItem(buffer->list, bufferIndex);
+    }
 
     return item;
 }
