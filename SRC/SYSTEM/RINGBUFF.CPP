@@ -166,9 +166,17 @@ void forEachRingBufferArgs(const ring_buffer_t *buffer, foreach_ring_buffer_item
     va_list copyArgs;
 
     if (!isRingBufferEmpty(buffer) && onItem)
-        for (int i = buffer->firstIndex; i < buffer->lastIndex; i++)
+    {
+        int count = getRingBufferCount(buffer);
+        int bufferIndex = buffer->firstIndex;
+
+        for (int i = 0; i < count; i++)
         {
             va_copy(copyArgs, args);
-            onItem(i, getListItem(buffer->list, i), copyArgs);
+            onItem(i, getListItem(buffer->list, bufferIndex), copyArgs);
+
+            if (++bufferIndex == count)
+                bufferIndex = 0;
         }
+    }
 }
