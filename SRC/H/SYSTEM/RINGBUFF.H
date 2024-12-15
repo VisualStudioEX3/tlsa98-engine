@@ -158,8 +158,8 @@ void *createRingBufferItem(ring_buffer_t *buffer);
  * item. You can use this function to implement behaviours like a dictionary
  * item key check or another required condition to satify before create the item.
  *
- * Like the createListItem function, this function not allocated new memory for the
- * item, only point to the next available position in the reserved memory.
+ * Like the createRingBufferItem function, this function not allocated new memory for
+ * the item, only point to the next available position in the reserved memory.
  */
 void *createRingBufferItemEx(ring_buffer_t *buffer, create_ring_buffer_item_callback onBeforeCreate, ...);
 
@@ -176,8 +176,8 @@ void *createRingBufferItemEx(ring_buffer_t *buffer, create_ring_buffer_item_call
  * item. You can use this function to implement behaviours like a dictionary
  * item key check or another required condition to satify before create the item.
  *
- * Like the createListItem function, this function not allocated new memory for the
- * item, only point to the next available position in the reserved memory.
+ * Like the createRingBufferItem function, this function not allocated new memory for
+ * the item, only point to the next available position in the reserved memory.
  */
 void *createRingBufferItemExArgs(ring_buffer_t *buffer, create_ring_buffer_item_callback onBeforeCreate, va_list args);
 
