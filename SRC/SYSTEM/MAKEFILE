@@ -5,12 +5,14 @@
 # 	Makefile.
 #
 
-sources	= system.cpp list.cpp services.cpp logger.cpp services\mem.cpp services\string.cpp services\datetime.cpp
+cpp_root 		= system.cpp services.cpp logger.cpp
+cpp_types		= list.cpp ringbuff.cpp
+cpp_services 	= services\mem.cpp services\string.cpp services\datetime.cpp
 
 all: compile clean
 
 compile: 	.SYMBOLIC
-	$(COMPILER_CMD) $(sources)
+	$(COMPILER_CMD) $(cpp_root) $(cpp_types) $(cpp_services)
 
 clean: 		.SYMBOLIC
 	@echo cleaning directory
