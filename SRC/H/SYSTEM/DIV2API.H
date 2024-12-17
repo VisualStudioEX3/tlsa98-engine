@@ -1,5 +1,5 @@
 //! SYSTEM.DLL - System library for DIV Games Studio 2.
-//! @copyright TLSA98 Engine (C) VisualStudioEX3, José Miguel Sánchez Fernández - 2022, 2023
+//! @copyright TLSA98 Engine (C) VisualStudioEX3, José Miguel Sánchez Fernández - 2022, 2025
 //! @copyright DIV Games Studio 2 (C) Hammer Technologies, Daniel Navarro Medrano - 1998, 1999
 /*!
     DIV Games Studio 2 API abstraction.
@@ -21,7 +21,7 @@ typedef void (*div2_fclose_f)(FILE *);
 
 /// @brief DIV Games Studio 2 API abstraction.
 /// @remarks DIV2.H header (the original DIV.H file) has member declarations that provokes
-/// linker warning 1027, redefinition of member ignored, when you include the header in two 
+/// linker warning 1027, redefinition of member ignored, when you include the header in two
 /// or more files. This abstraction allows to point to required functions and macros from
 /// DIV header from SYSTEM library, avoiding the requirement of include DIV2.H on another
 /// files.
@@ -59,19 +59,19 @@ typedef struct
 
     /// @brief Finalizes and setup the return value of an exported DIV function.
     /// @param value Integer value to return.
-    /// @remarks This functions always must be called at the end of an exported function to 
+    /// @remarks This functions always must be called at the end of an exported function to
     /// DIV program.
     div2_return_value_f setReturnValue;
 
     /// @brief Opens or creates a file.
-    /// @param mode File access mode. See standard fopen documentation to know the avaiable 
+    /// @param mode File access mode. See standard fopen documentation to know the avaiable
     /// modes: https://cplusplus.com/reference/cstdio/fopen/.
     /// @return Returns the pointer to the opened file, #NULL otherwise.
     /// @remarks DIV Games Studio runtime has his own fopen() implementation to manage his
     /// file open operations. If you try to use the standard fopen() the program starts to
     /// generate memory corruption and even crashes.
     div2_fopen_f openFile;
-    
+
     /// @brief fclose() alias to DIV implementation.
     /// @param file The pointer to file to close.
     /// @remarks DIV Games Studio runtime has his own fclose() implementation to manage his

@@ -1,5 +1,5 @@
 //! FOO.DLL - Test library.
-//! @copyright TLSA98 Engine (C) VisualStudioEX3, José Miguel Sánchez Fernández - 2022, 2023
+//! @copyright TLSA98 Engine (C) VisualStudioEX3, José Miguel Sánchez Fernández - 2022, 2025
 //! @copyright DIV Games Studio 2 (C) Hammer Technologies, Daniel Navarro Medrano - 1998, 1999
 /*!
     Test library to perform tests over the engine libraries.
@@ -61,8 +61,8 @@ void __export divmain(COMMON_PARAMS)
 
     engine->fileLogger->log("Initializing FOO.DLL...");
 
-    // TODO: Implement own assert to allow custom assertion messages, outputs like the future 
-    // built-in game console or error reporter, and termination action (end program or 
+    // TODO: Implement own assert to allow custom assertion messages, outputs like the future
+    // built-in game console or error reporter, and termination action (end program or
     // terminate current level and return to game console).
     assert(TLSA98_ENGINE_SIGNATURE_EQUALS);
     assert(TLSA98_ENGINE_VERSION_MAJOR_OR_EQUALS(TLSA_ENGINE_MAJOR_VERSION, TLSA_ENGINE_MINOR_VERSION));

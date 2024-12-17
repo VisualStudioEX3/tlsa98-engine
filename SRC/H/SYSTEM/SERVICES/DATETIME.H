@@ -1,5 +1,5 @@
 //! SYSTEM.DLL - System library for DIV Games Studio 2.
-//! @copyright TLSA98 Engine (C) VisualStudioEX3, José Miguel Sánchez Fernández - 2022, 2023
+//! @copyright TLSA98 Engine (C) VisualStudioEX3, José Miguel Sánchez Fernández - 2022, 2025
 //! @copyright DIV Games Studio 2 (C) Hammer Technologies, Daniel Navarro Medrano - 1998, 1999
 /*!
     DateTime service.
@@ -16,7 +16,7 @@
 typedef ulong (*datetime_getTickCount_f)();
 typedef datetime_t *(*datetime_getDateTime_f)();
 typedef void (*datetime_getDateTimeNotAlloc_f)(datetime_t *);
-typedef string (*datetime_dateTimeToString_f)(const datetime_t*);
+typedef string (*datetime_dateTimeToString_f)(const datetime_t *);
 
 /// @brief DateTime service interface.
 typedef struct

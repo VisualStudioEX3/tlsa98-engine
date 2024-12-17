@@ -1,5 +1,5 @@
 //! SYSTEM.DLL - System library for DIV Games Studio 2.
-//! @copyright TLSA98 Engine (C) VisualStudioEX3, José Miguel Sánchez Fernández - 2022, 2023
+//! @copyright TLSA98 Engine (C) VisualStudioEX3, José Miguel Sánchez Fernández - 2022, 2025
 //! @copyright DIV Games Studio 2 (C) Hammer Technologies, Daniel Navarro Medrano - 1998, 1999
 /*!
     Fixed allocated list.
@@ -253,7 +253,7 @@ void *findListItemArgs(const list_t *list, find_list_item_callback predicate, va
  * @param predicate Function callback to execute in each item. This functions define a
  * predicate that an item must be match.
  * @param ... Optional list of arguments to use as extra parameters in the callback.
- * @returns Returns #true if the item exists in the list, or #false if not exists, if the list 
+ * @returns Returns #true if the item exists in the list, or #false if not exists, if the list
  * is empty or if the list is #NULL.
  * @remarks The predicate function must be return #true to tell the list what item match.
  */
@@ -265,7 +265,7 @@ bool isListItemExists(const list_t *list, find_list_item_callback predicate, ...
  * @param predicate Function callback to execute in each item. This functions define a
  * predicate that an item must be match.
  * @param args List of arguments to use as extra parameters in the callback.
- * @returns Returns #true if the item exists in the list, or #false if not exists, if the list 
+ * @returns Returns #true if the item exists in the list, or #false if not exists, if the list
  * is empty or if the list is #NULL.
  * @remarks The predicate function must be return #true to tell the list what item match.
  */

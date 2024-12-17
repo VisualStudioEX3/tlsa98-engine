@@ -1,5 +1,5 @@
 //! SYSTEM.DLL - System library for DIV Games Studio 2.
-//! @copyright TLSA98 Engine (C) VisualStudioEX3, José Miguel Sánchez Fernández - 2022, 2023
+//! @copyright TLSA98 Engine (C) VisualStudioEX3, José Miguel Sánchez Fernández - 2022, 2025
 //! @copyright DIV Games Studio 2 (C) Hammer Technologies, Daniel Navarro Medrano - 1998, 1999
 /*!
     Global definitions, macros and types, and DIV Games Studio 2 API include and extensions.
@@ -210,7 +210,7 @@ typedef struct
     service_provider_t *services;
 
     /// @brief Standalone File logger.
-    /// @remarks Use this logger when you required to log activity on core implementations, 
+    /// @remarks Use this logger when you required to log activity on core implementations,
     /// because this service is full-standalone, doesn't had any dependency with the engine
     /// services.
     file_logger_service_t *fileLogger;
